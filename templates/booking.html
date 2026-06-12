@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Just Recycling - Professional Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #27ae60;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            color: var(--text);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            padding: 15px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+        }
+
+        .main-card {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stepper */
+        .stepper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            color: #cbd5e0;
+            font-size: 13px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .step.active {
+            color: var(--primary);
+        }
+
+        .step::before {
+            content: attr(data-step);
+            display: block;
+            width: 30px;
+            height: 30px;
+            background: #edf2f7;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            line-height: 30px;
+            color: #718096;
+            transition: 0.3s;
+        }
+
+        .step.active::before {
+            background: var(--primary);
+            color: white;
+        }
+
+        .form-step {
+            display: none;
+            transition: 0.3s;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        /* Materials Grid */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .material-card {
+            border: 2px solid #edf2f7;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .material-card:hover {
+            border-color: var(--primary);
+        }
+
+        .material-card.selected {
+            background: #f0fff4;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .material-card i {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .weight-ctrl {
+            display: none;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            justify-content: space-between;
+            background: white;
+            padding: 5px;
+            align-items: center;
+        }
+
+        .material-card.selected .weight-ctrl {
+            display: flex;
+        }
+
+        .weight-ctrl button {
+            background: #f8f9fa;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Modern Calendar */
+        .calendar-section {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .calendar-box {
+            flex: 1.5;
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 320px;
+        }
+
+        .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cal-header span {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .cal-header span:hover {
+            background: #f0f0f0;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .day {
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 14px;
+            border: 1px solid transparent;
+        }
+
+        .day:hover:not(.empty) {
+            background: #f0fff4;
+            color: var(--primary);
+            border-color: #c6f6d5;
+        }
+
+        .day.selected {
+            background: var(--primary) !important;
+            color: white;
+        }
+
+        .day.empty {
+            cursor: default;
+        }
+
+        .day-name {
+            font-weight: bold;
+            color: #a0aec0;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .time-slots {
+            flex: 1;
+        }
+
+        .slot-btn {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: 2px solid #edf2f7;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .slot-btn.selected {
+            border-color: var(--primary);
+            background: #f0fff4;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Step 3 Inputs */
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #edf2f7;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+        }
+
+        /* Step 4 Summary */
+        .summary-card {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .summary-line:last-child {
+            border: none;
+        }
+
+        .summary-line strong {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .summary-line span {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        /* Footer */
+        .footer-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-next {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-next:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: #edf2f7;
+            color: #718096;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Not Just Recycling</div>
+        <div style="font-size: 14px; color: #666;"><i class="fas fa-user-circle"></i> Account</div>
+    </nav>
+
+    <div class="main-card">
+        <div class="stepper">
+            <div class="step active" data-step="1">Materials</div>
+            <div class="step" data-step="2">Schedule</div>
+            <div class="step" data-step="3">Details</div>
+            <div class="step" data-step="4">Confirm</div>
+        </div>
+
+        <!-- Step 1: Materials -->
+        <div class="form-step active" id="step1">
+            <h2>Select Materials</h2>
+            <div class="materials-grid">
+                <div class="material-card" onclick="toggleMat(this)">
+                    <i class="fas fa-vial" style="color:#e74c3c"></i>
+                    <h3>Plastic</h3>
+                    <div class="weight-ctrl" onclick="event.stopPropagation()">
+                        <button onclick="changeW('plastic', -1)">-</button>
+                        <input type="text" id="w-plastic" value="1 kg" readonly
+                            style="width:50px; border:none; text-align:center;">
+                        <button onclick="changeW('plastic', 1)">+</button>
+                    </div>
+                </div>
+                <div class="material-card" onclick="toggleMat(this, 'Oil')">
+                    <i class="fas fa-oil-can" style="color:#e67e22"></i>
+                    <h3>Cooking Oil</h3>
+                    <div class="weight-ctrl" onclick="event.stopPropagation()">
+                        <button onclick="changeW('oil', -1)">-</button>
+                        <input type="text" id="w-oil" value="1 L" readonly
+                            style="width:50px; border:none; text-align:center;">
+                        <button onclick="changeW('oil', 1)">+</button>
+                    </div>
+                </div>
+                <div class="material-card" onclick="toggleMat(this, 'Paper')">
+                    <i class="fas fa-file-alt" style="color:#3498db"></i>
+                    <h3>Paper</h3>
+                    <div class="weight-ctrl" onclick="event.stopPropagation()">
+                        <button onclick="changeW('paper', -1)">-</button>
+                        <input type="text" id="w-paper" value="1 kg" readonly
+                            style="width:50px; border:none; text-align:center;">
+                        <button onclick="changeW('paper', 1)">+</button>
+                    </div>
+                </div>
+                <div class="material-card" onclick="toggleMat(this, 'Cardboard')">
+                    <i class="fas fa-box" style="color:#7f8c8d"></i>
+                    <h3>Cardboard</h3>
+                    <div class="weight-ctrl" onclick="event.stopPropagation()">
+                        <button onclick="changeW('cardboard', -1)">-</button>
+                        <input type="text" id="w-cardboard" value="1 kg" readonly
+                            style="width:50px; border:none; text-align:center;">
+                        <button onclick="changeW('cardboard', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-btns">
+                <span></span>
+                <button class="btn btn-next" onclick="move(2)">Next Step</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Schedule -->
+        <div class="form-step" id="step2">
+            <h2>Schedule Pickup</h2>
+            <div class="calendar-section">
+                <div class="calendar-box">
+                    <div class="cal-header">
+                        <span onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></span>
+                        <span id="monthYearDisplay"></span>
+                        <span onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="days-grid" id="calDays"></div>
+                </div>
+                <div class="time-slots">
+                    <button class="slot-btn" onclick="selSlot(this)">09:00 AM - 11:00 AM</button>
+                    <button class="slot-btn" onclick="selSlot(this)">11:00 AM - 01:00 PM</button>
+                    <button class="slot-btn" onclick="selSlot(this)">02:00 PM - 04:00 PM</button>
+                </div>
+            </div>
+            <div class="footer-btns">
+                <button class="btn btn-back" onclick="move(1)">Back</button>
+                <button class="btn btn-next" onclick="move(3)">Next Step</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Details -->
+        <div class="form-step" id="step3">
+            <h2>Details</h2>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="inpName" placeholder="John Doe">
+            </div>
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="text" id="inpPhone" placeholder="+20 123 456 789">
+            </div>
+            <div class="input-group">
+                <label>Address</label>
+                <textarea id="inpAddr" rows="3"></textarea>
+            </div>
+            <div class="footer-btns">
+                <button class="btn btn-back" onclick="move(2)">Back</button>
+                <button class="btn btn-next" onclick="prepSum(); move(4)">Review</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Confirm -->
+        <div class="form-step" id="step4">
+            <h2>Confirm Booking</h2>
+            <div class="summary-card" id="finalSum"></div>
+            <div class="footer-btns">
+                <button class="btn btn-back" onclick="move(3)">Back</button>
+                <button class="btn btn-next" onclick="sendBooking()">Confirm & Rewards</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let curDate = new Date();
+        let selDateStr = "";
+        let selTimeStr = "";
+
+        function renderCal() {
+            const grid = document.getElementById('calDays');
+            const display = document.getElementById('monthYearDisplay');
+            grid.innerHTML = "";
+
+            const m = curDate.getMonth();
+            const y = curDate.getFullYear();
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            display.innerText = `${months[m]} ${y}`;
+
+            ["S", "M", "T", "W", "T", "F", "S"].forEach(d => grid.innerHTML += `<div class="day-name">${d}</div>`);
+
+            const first = new Date(y, m, 1).getDay();
+            const last = new Date(y, m + 1, 0).getDate();
+
+            for (let i = 0; i < first; i++) grid.innerHTML += `<div class="day empty"></div>`;
+            for (let d = 1; d <= last; d++) {
+                const el = document.createElement('div');
+                el.className = 'day';
+                el.innerText = d;
+                el.onclick = function () {
+                    document.querySelectorAll('.day').forEach(x => x.classList.remove('selected'));
+                    this.classList.add('selected');
+                    const month = (m + 1).toString().padStart(2, '0');
+                    const day = d.toString().padStart(2, '0');
+                    selDateStr = `${y}-${month}-${day}`;
+                };
+                grid.appendChild(el);
+            }
+        }
+
+        function changeMonth(dir) { curDate.setMonth(curDate.getMonth() + dir); renderCal(); }
+        function selSlot(btn) { document.querySelectorAll('.slot-btn').forEach(x => x.classList.remove('selected')); btn.classList.add('selected'); selTimeStr = btn.innerText; }
+        function move(n) { document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active')); document.getElementById('step' + n).classList.add('active'); document.querySelectorAll('.step').forEach((s, i) => s.classList.toggle('active', i < n)); }
+        function toggleMat(card) { card.classList.toggle('selected'); }
+        function changeW(id, amt) { let input = document.getElementById('w-' + id); let val = parseInt(input.value); if (val + amt >= 1) input.value = (val + amt) + (id === 'oil' ? ' L' : ' kg'); }
+        function prepSum() {
+            let mats = []; document.querySelectorAll('.material-card.selected').forEach(c => mats.push(`${c.querySelector('h3').innerText} (${c.querySelector('input').value})`));
+            document.getElementById('finalSum').innerHTML = `
+                <div class="summary-line"><strong>Name</strong><span>${document.getElementById('inpName').value || '-'}</span></div>
+                <div class="summary-line"><strong>Materials</strong><span>${mats.join(', ') || 'None'}</span></div>
+                <div class="summary-line"><strong>Date</strong><span>${selDateStr || 'Not Set'}</span></div>
+                <div class="summary-line"><strong>Time</strong><span>${selTimeStr || 'Not Set'}</span></div>
+                <div class="summary-line"><strong>Address</strong><span>${document.getElementById('inpAddr').value || '-'}</span></div>
+            `;
+        }
+
+        function sendBooking() {
+            if (!selDateStr || !selTimeStr) { alert("Please select date and time"); return; }
+            const materials = {}; document.querySelectorAll('.material-card.selected').forEach(c => materials[c.querySelector('h3').innerText] = c.querySelector('input').value);
+            const data = {
+                full_name: document.getElementById('inpName').value,
+                phone_number: document.getElementById('inpPhone').value,
+                address: document.getElementById('inpAddr').value,
+                date: selDateStr,
+                materials: materials
+            };
+            fetch("/booking/create/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+                .then(res => res.json())
+                .then(res => { if (res.success) { alert("Booking confirmed! ID: " + res.booking_id); location.href = "/rewards/"; } else { alert("Booking failed: " + res.error); } })
+                .catch(err => console.error("Error:", err));
+        }
+
+        renderCal();
+    </script>
+</body>
+
+</html>
