@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Just Recycling</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/185/185049.png" alt="Logo" width="30" height="30"
+                    class="me-2">
+                <span class="fw-bold text-dark">Not Just Recycling</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link px-3" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="{% url 'aboutus' %}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="{% url 'contact' %}">Contact Us</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-secondary px-4 rounded-3" href="{% url 'signin' %}">Sign In</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-signup px-4 rounded-3 text-white" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section d-flex align-items-center justify-content-center text-center text-white"
+    style="background:url('{% static 'back.jpeg' %}') center/cover no-repeat;">
+        <div class= "container">
+        <h1 class="display-3 fw-bold mb-4">About Not Just Recycling</h1>
+        <p class="lead mx-auto" style="max-width: 700px;">
+            We're dedicated to making the world a cleaner, greener place through innovative recycling solutions
+        </p>
+        </div>
+    </section>
+
+    <section class="mission-section py-5" data-aos="fade-up">
+        <div class="container py-4">
+            <h2 class="fw-bold mb-4">Our Mission</h2>
+            <p class="mission-text mb-5 text-muted">
+                At <strong>Not Just Recycling</strong>, our mission is to transform the way people think about waste. We
+                believe that every piece of recyclable material has value and potential for a new life.
+            </p>
+
+            <ul class="list-unstyled">
+                <li class="d-flex align-items-start mb-3" data-aos="fade-left" data-aos-delay="100">
+                    <span class="mission-dot me-3"></span>
+                    <p class="text-muted">Encourage individuals and businesses to actively participate in recycling
+                        programs</p>
+                </li>
+                <li class="d-flex align-items-start mb-3" data-aos="fade-left" data-aos-delay="200">
+                    <span class="mission-dot me-3"></span>
+                    <p class="text-muted">Provide convenient collection services for recyclable materials</p>
+                </li>
+                <li class="d-flex align-items-start mb-3" data-aos="fade-left" data-aos-delay="300">
+                    <span class="mission-dot me-3"></span>
+                    <p class="text-muted">Reduce the amount of waste sent to landfills</p>
+                </li>
+                <li class="d-flex align-items-start mb-3" data-aos="fade-left" data-aos-delay="400">
+                    <span class="mission-dot me-3"></span>
+                    <p class="text-muted">Create awareness about the importance of recycling and environmental
+                        conservation</p>
+                </li>
+                <li class="d-flex align-items-start mb-3" data-aos="fade-left" data-aos-delay="500">
+                    <span class="mission-dot me-3"></span>
+                    <p class="text-muted">Reward and incentivize sustainable behavior through our program</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="values-section py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-3" data-aos="zoom-in">Our Core Values</h2>
+            <p class="text-muted mb-5" data-aos="zoom-in" data-aos-delay="100">These values guide everything we do and
+                shape our approach to environmental sustainability</p>
+
+            <div class="row g-4">
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="100">
+                    <div class="value-card p-4 shadow-sm bg-white h-100">
+                        <div class="value-icon mb-3"><i class="bi bi-leaf"></i></div>
+                        <h5 class="fw-bold">Sustainability</h5>
+                        <p class="small text-muted">We're committed to creating a sustainable future by reducing waste
+                            and promoting circular economy principles.</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="200">
+                    <div class="value-card p-4 shadow-sm bg-white h-100">
+                        <div class="value-icon mb-3"><i class="bi bi-heart"></i></div>
+                        <h5 class="fw-bold">Community</h5>
+                        <p class="small text-muted">Building a community of environmentally conscious individuals who
+                            care about the planet's future.</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="300">
+                    <div class="value-card p-4 shadow-sm bg-white h-100">
+                        <div class="value-icon mb-3"><i class="bi bi-globe"></i></div>
+                        <h5 class="fw-bold">Global Impact</h5>
+                        <p class="small text-muted">Our local actions contribute to global efforts in combating climate
+                            change and environmental degradation.</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="400">
+                    <div class="value-card p-4 shadow-sm bg-white h-100">
+                        <div class="value-icon mb-3"><i class="bi bi-bullseye"></i></div>
+                        <h5 class="fw-bold">Innovation</h5>
+                        <p class="small text-muted">Using technology and innovation to make recycling more accessible,
+                            efficient, and rewarding for everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+
+
+
+    <section class="impact-section py-5 bg-white">
+        <div class="container text-center py-4">
+            <h2 class="fw-bold mb-3 section-title" data-aos="fade-down" style="color: #1a3a3a; font-size: 2.5rem;">
+                Environmental Impact</h2>
+            <p class="text-muted mb-5" data-aos="fade-down" data-aos-delay="100">Together with our community, we're
+                making a real difference in protecting our planet</p>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="100">
+                    <div class="impact-card p-5 rounded-4 shadow-sm h-100"
+                        style="background-color: #e6f4f1; border: none; transition: transform 0.3s ease;">
+                        <h2 class="display-4 fw-bold text-dark mb-0"><span class="counter">2</span>M+ kg</h2>
+                        <p class="fw-bold text-dark mt-2 mb-3">Materials Recycled</p>
+                        <p class="small text-muted mb-0">Total weight of paper, cardboard, plastic, and oil collected
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="200">
+                    <div class="impact-card p-5 rounded-4 shadow-sm h-100"
+                        style="background-color: #e3f2fd; border: none; transition: transform 0.3s ease;">
+                        <h2 class="display-4 fw-bold text-primary mb-0"><span class="counter">85</span>%</h2>
+                        <p class="fw-bold text-primary mt-2 mb-3">CO₂ Reduction</p>
+                        <p class="small text-muted mb-0">Estimated carbon emissions prevented through recycling</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="300">
+                    <div class="impact-card p-5 rounded-4 shadow-sm h-100"
+                        style="background-color: #f0f4f8; border: none; transition: transform 0.3s ease;">
+                        <h2 class="display-4 fw-bold text-secondary mb-0"><span class="counter">50</span>K+</h2>
+                        <p class="fw-bold text-secondary mt-2 mb-3">Active Members</p>
+                        <p class="small text-muted mb-0">Growing community of environmental champions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        // تهيئة حركات الظهور
+        AOS.init({ duration: 1000, once: true });
+
+        // كود العداد المتحرك البسيط
+        $('.counter').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 2000,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        });
+    </script>
+
+
+
+    <section class="accept-section py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+
+                <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
+                    <img src="{% static '222.jpeg' %}" alt="Recycling Materials"
+                        class="img-fluid rounded-4 shadow-lg border border-white border-opacity-25">
+                </div>
+
+                <div class="col-md-6 ps-md-5">
+                    <h2 class="fw-bold mb-3 text-white" data-aos="fade-up">What We Accept</h2>
+                    <p class="text-white-50 mb-4 fs-5" data-aos="fade-up" data-aos-delay="100">
+                        We specialize in collecting and recycling four main categories of materials:
+                    </p>
+
+                    <div class="accept-list">
+                        <div class="d-flex align-items-center mb-4 p-3 rounded-4 bg-white bg-opacity-10"
+                            data-aos="fade-left" data-aos-delay="200">
+                            <div class="accept-icon me-3 bg-purple-light">
+                                <i class="bi bi-journal-text text-purple"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-white">Paper & Cardboard</h5>
+                                <p class="small text-white-50 mb-0">Newspapers, magazines, office paper, cardboard
+                                    boxes, and packaging materials</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-4 p-3 rounded-4 bg-white bg-opacity-10"
+                            data-aos="fade-left" data-aos-delay="300">
+                            <div class="accept-icon me-3 bg-teal-light">
+                                <i class="bi bi-cup-straw text-teal"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-white">Plastic</h5>
+                                <p class="small text-white-50 mb-0">Bottles, containers, packaging, and other plastic
+                                    materials</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-4 p-3 rounded-4 bg-white bg-opacity-10"
+                            data-aos="fade-left" data-aos-delay="400">
+                            <div class="accept-icon me-3 bg-orange-light">
+                                <i class="bi bi-droplet-half text-orange"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-white">Used Cooking Oil</h5>
+                                <p class="small text-white-50 mb-0">Used cooking and frying oil that can be converted
+                                    into biofuel</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-section py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <h5 class="fw-bold d-flex align-items-center">
+                        <i class="bi bi-recycle me-2 text-success"></i>
+                        Not Just Recycling
+                    </h5>
+                    <p class="small text-white-50 mt-3">
+                        Together we can protect our planet through innovative recycling and sustainable practices.
+                    </p>
+                </div>
+
+                <div class="col-md-4 text-md-center" data-aos="fade-up" data-aos-delay="100">
+                    <h6 class="fw-bold text-white mb-3">Quick Links</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="{% url 'home' %}" class="text-white-50 text-decoration-none">Home</a></li>
+                        <li><a href="{% url 'aboutus' %}" class="text-white-50 text-decoration-none">About Us</a></li>
+                        <li><a href="{% url 'contact' %}" class="text-white-50 text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 text-md-end" data-aos="fade-up" data-aos-delay="200">
+                    <h6 class="fw-bold text-white mb-3">Contact</h6>
+                    <p class="small text-white-50 mb-1">Email: info@notjustrecycling.com</p>
+                    <p class="small text-white-50">Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+
+            <hr class="border-secondary mt-5 mb-4 opacity-25">
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="small text-white-50 mb-0">
+                        &copy; 2026 <span class="fw-bold">Not Just Recycling</span>. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

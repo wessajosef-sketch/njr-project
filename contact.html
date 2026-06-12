@@ -1,0 +1,771 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Just Recycling | Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #1a4d2e;
+            --secondary: #2e7d32;
+            --accent: #1565c0;
+            --light-bg: #f4f7f6;
+            --text-dark: #333;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: var(--text-dark);
+        }
+
+        /* --- Header --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .auth-btns .btn {
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .btn-in {
+            border: 1px solid #ddd;
+            color: var(--text-dark);
+        }
+
+        .btn-up {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-up:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 350px;
+            background: linear-gradient(110deg, #1a4d2e 0%, #2e7d32 45%, #1976d2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            animation: fadeInDown 0.8s;
+        }
+
+        .hero p {
+            max-width: 600px;
+            opacity: 0.9;
+            animation: fadeInUp 1s;
+            font-size: 1.1rem;
+        }
+
+        /* --- Contact Content Section --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            max-width: 1100px;
+            margin: -50px auto 50px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 1.2s;
+        }
+
+        /* Form Side */
+        .contact-form {
+            padding: 40px;
+            border-right: 1px solid #eee;
+        }
+
+        .contact-form h2 {
+            margin-bottom: 10px;
+            color: #222;
+            font-size: 1.8rem;
+        }
+
+        .contact-form p {
+            color: #777;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fdfdfd;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: var(--secondary);
+            background: white;
+            box-shadow: 0 0 8px rgba(46, 125, 50, 0.1);
+        }
+
+        .btn-send {
+            width: 100%;
+            padding: 14px;
+            background: #118a7e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn-send:hover {
+            background: #0d6b62;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 138, 126, 0.3);
+        }
+
+        .btn-send i {
+            transition: transform 0.3s;
+        }
+
+        .btn-send:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Info Side */
+        .contact-info {
+            padding: 40px;
+            background: #ffffff;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .icon-circle {
+            min-width: 45px;
+            height: 45px;
+            background: #e8f5e9;
+            color: #118a7e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .info-item:hover .icon-circle {
+            background: #118a7e;
+            color: white;
+            transform: rotate(15deg);
+        }
+
+        .info-text h4 {
+            font-size: 1rem;
+            color: #222;
+            margin-bottom: 3px;
+        }
+
+        .info-text p {
+            color: #666;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+
+        .social-section {
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 25px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: #f0f0f0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                margin: 20px;
+            }
+
+            .contact-form {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+
+        /* تصميم صندوق مواعيد العمل */
+        .office-hours {
+            margin-top: 30px;
+            background-color: #d1e7e4;
+            /* اللون الأخضر المائي من الصورة */
+            padding: 25px;
+            border-radius: 15px;
+            color: #2c3e50;
+            transition: var(--transition);
+            animation: fadeInRight 1.5s ease;
+        }
+
+        .office-hours:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .office-hours h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .hours-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: 5px;
+        }
+
+        .hours-row.closed {
+            color: #c0392b;
+            /* لون أحمر هادئ لكلمة Closed */
+            border-bottom: none;
+        }
+
+        /* أنيميشن الدخول من اليمين */
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">♻️ Not Just Recycling</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                <li><a href="{% url 'booking' %}">Services</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-btns">
+            <a href="{% url 'signin' %}" class="btn btn-in">Sign In</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Get In Touch</h1>
+        <p>Have questions or suggestions? We'd love to hear from you. Send us a message and we'll respond as soon as
+            possible.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="contact-container">
+        <!-- Form -->
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <p>Fill out the form below and we'll get back to you shortly.</p>
+
+            <form method="post" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label>Your Name</label>
+                    <input type="text" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="john@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+                </div>
+                <button type="submit" class="btn-send">
+                    <i class="fa-regular fa-paper-plane"></i> Send Message
+                </button>
+                {% if success %}
+                <p style="color:green;">{{ success }}</p>
+                {% endif %}
+            </form>
+        </div>
+
+        <!-- Info -->
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <p style="color:#777; font-size: 0.9rem; margin-bottom: 30px;">Reach out to us through any of these
+                channels. We're here to help!</p>
+
+            <div class="info-item">
+                <div class="icon-circle"><i class="fa-regular fa-envelope"></i></div>
+                <div class="info-text">
+                    <h4>Email</h4>
+                    <p>info@notjustrecycling.com</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
+                <div class="info-text">
+                    <h4>Phone</h4>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="info-text">
+                    <h4>Address</h4>
+                    <p>123 Green Street, Eco City, EC 12345</p>
+                </div>
+            </div>
+
+            <div class="social-section">
+                <h4>Follow Us</h4>
+                <p style="color:#999; font-size: 0.8rem;">Stay connected on social media</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/1E68YwhWAM/"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/notjustrecycling?igsh=aHRhazltaWtnd2sx"><i
+                            class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- Office Hours -->
+    <div class="office-hours">
+        <h3>Office Hours</h3>
+        <div class="hours-list">
+            <div class="hours-row">
+                <span>Monday - Friday:</span>
+                <span>9:00 AM - 6:00 PM</span>
+            </div>
+            <div class="hours-row">
+                <span>Saturday:</span>
+                <span>10:00 AM - 4:00 PM</span>
+            </div>
+            <div class="hours-row closed">
+                <span>Sunday:</span>
+                <span>Closed</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="faq-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to common questions</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">How do I request a pickup? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Simply create an account, log in, and submit a pickup request through our platform.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What materials do you accept? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>We accept paper, cardboard, plastic, and used cooking oil. Make sure materials are clean and
+                        properly sorted.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How do I earn EcoCoins? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Coins are added to your account based on the weight and type of materials you recycle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .faq-section {
+            padding: 60px 8%;
+            background-color: #f8fafc;
+            text-align: center;
+        }
+
+        .faq-header h2 {
+            font-size: 2.2rem;
+            color: #1a4d2e;
+            margin-bottom: 10px;
+        }
+
+        .faq-header p {
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            /* لجعل النص يبدأ من اليسار كما في الصورة */
+        }
+
+        .faq-item {
+            background: #f1f3f4;
+            /* لون الخلفية الهادئ من الصورة */
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-color: #2e7d32;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 25px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .faq-question i {
+            font-size: 0.9rem;
+            transition: transform 0.4s ease;
+            color: #2e7d32;
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            /* مخفي في البداية */
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+            background: white;
+        }
+
+        .faq-answer p {
+            padding: 20px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* كلاس التفعيل (عند الضغط) */
+        .faq-item.active {
+            background: white;
+            border-color: #2e7d32;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            /* القيمة الكافية لظهور النص */
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+    </style>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) item.classList.remove('active');
+                });
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <div class="footer-logo"><i class="fas fa-recycle"></i> <span>Not Just Recycling</span></div>
+                <p>Together we can protect our planet through recycling and sustainability.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-footer">
+                <h3>Contact</h3>
+                <p>Email: <a href="mailto:info@notjustrecycling.com">info@notjustrecycling.com</a></p>
+                <p>Phone: <a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 Not Just Recycling. All rights reserved.</div>
+    </footer>
+
+    <style>
+        /* Footer Styling */
+        .main-footer {
+            background-color: #1a1a1a;
+            /* Dark background as shown in image */
+            color: #ffffff;
+            padding: 60px 8% 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4caf50;
+            /* Eco-friendly green */
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            color: #bbbbbb;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a,
+        .contact-footer a {
+            color: #bbbbbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        /* Hover Effects - الحركات */
+        .footer-section ul li a:hover,
+        .contact-footer a:hover {
+            color: #4caf50;
+            padding-left: 8px;
+            /* Subtle slide effect */
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #333333;
+            padding-top: 25px;
+            color: #777777;
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-logo {
+                justify-content: center;
+            }
+
+            .footer-section ul li a:hover {
+                padding-left: 0;
+            }
+        }
+    </style>
+
+</body>
+
+</html>
