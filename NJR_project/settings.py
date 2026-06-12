@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,8 +28,11 @@ SECRET_KEY = 'django-insecure-@g$+i)r+ypk-3sze5#ncl35knfwx$*bxcxfz3#wr3(jh4b!j5c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["njr-project-jctw.vercel.app"]
-
+ALLOWED_HOSTS = [
+    "njr-project-jctw.vercel.app",
+    "localhost",
+    "127.0.0.1"
+]
 
 # Application definition
 
@@ -50,8 +55,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'NJR_project.urls'
@@ -79,11 +82,17 @@ WSGI_APPLICATION = 'NJR_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join('/tmp', 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'defaultdb',
+        'USER': 'avnadmin',
+        'PASSWORD': 'AVNS_G8FypAWWeC1VcN2Hrb0',
+        'HOST': 'mysql-945dcb7-wesajosef-3a52.g.aivencloud.com',
+        'PORT': '14428',
+        'OPTIONS': {
+            'ssl': {'sslmode': 'REQUIRED'}
+        }
     }
 }
-
 
 
 # Password validation
